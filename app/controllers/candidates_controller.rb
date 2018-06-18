@@ -31,7 +31,7 @@ class CandidatesController < ApplicationController
 
   def issue_badge_call(candidate)
     payload = {
-                "recipient_email": "#{candidate.name.delete(' ')}@email.com",
+                "recipient_email": "#{candidate.name.gsub(/\W+/, '')}@email.com",
                 "badge_template_id": "8117c0df-d072-4026-b52e-af4b1986e197",
                 "issued_at": "#{Time.now}",
                 "issued_to_first_name": "#{candidate.name}",
