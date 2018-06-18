@@ -8,8 +8,10 @@ class CandidatesController < ApplicationController
 
   def assign_badge
     candidate = Candidate.find(params[:candidate])
-    new_badge = JSON.parse(issue_badge_call(candidate))["data"]["badge_template"]["name"]
-    candidate.update_attributes!(badge: new_badge)
+    unless candidate.badge
+      new_badge = JSON.parse(issue_badge_call(candidate))["data"]["badge_template"]["name"]
+      candidate.update_attributes!(badge: new_badge)
+    end
     redirect_to root_path
   end
 
@@ -35,7 +37,7 @@ class CandidatesController < ApplicationController
                 "issued_to_first_name": "#{candidate.name}",
                 "issued_to_last_name": "N/A"
               }.to_json
-    header = { "Accept" => "application/json", "Authorization" => "Basic #{Base64.encode64(Rails.application.secrets.acclaim_token)}:",
+    header = { "Accept" => "application/json", "Authorization" => "Basic #{Base64.encode64(Rails.application.secrets.acclaim_token)}",
                "Content-Type" => "application/json"}
     RestClient.post("#{Rails.application.secrets.acclaim_url}/badges", payload, header).body
   end
