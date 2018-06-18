@@ -13,6 +13,11 @@ class CandidatesController < ApplicationController
     redirect_to root_path
   end
 
+  def destroy
+    Candidate.find(params[:candidate]).destroy!
+    redirect_to root_path
+  end
+
   private
 
   def setup_params(letter)

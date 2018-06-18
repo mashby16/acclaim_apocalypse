@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   get '/new_candidates', to: 'candidates#new'
   post '/fetch_candidates', to: 'candidates#fetch'
   post '/assign_badge', to: 'candidates#assign_badge'
+  delete '/remove_candidate', to: 'candidates#destroy'
 end

@@ -10,7 +10,7 @@
       table.table.table-hover
         thead
           tr
-            th Assign Badge
+            th Actions
             th Name
             th Description
             th Badge
@@ -18,7 +18,9 @@
         tbody
           - @candidates.each do |candidate|
             tr
-              td= button_to "Assign Badge", assign_badge_path(candidate: candidate.id), class: "btn btn-primary"
+              td
+                = button_to "Assign Badge", assign_badge_path(candidate: candidate.id), class: "btn btn-primary"
+                = button_to "Remove Candidate", remove_candidate_path(candidate: candidate.id), class: "btn btn-danger", method: "delete"
               td= candidate.name
               td= candidate.description
               td= candidate.badge
