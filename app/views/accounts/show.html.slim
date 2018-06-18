@@ -1,0 +1,25 @@
+.container
+  .row
+    .col-md-10
+      h1 ="#{@account.username}'s Candidates"
+    .col-md-2
+      = link_to "Find New Candidates", new_candidates_path, class: "btn btn-primary"
+  .row
+    .col-md-8
+    -if @candidates
+      table.table.table-hover
+        thead
+          tr
+            th Assign Badge
+            th Name
+            th Description
+            th Badge
+            th Image
+        tbody
+          - @candidates.each do |candidate|
+            tr
+              td= button_to "Assign Badge", assign_badge_path(candidate: candidate.id), class: "btn btn-primary"
+              td= candidate.name
+              td= candidate.description
+              td= candidate.badge
+              td= image_tag(candidate.image)

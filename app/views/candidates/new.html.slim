@@ -1,0 +1,12 @@
+.container
+  .text-center
+    h1 Find New Candidates by Name
+    Candidates Name Begins With:
+    .row
+      erb:
+        <%=
+          ("A".."Z").to_a.map do |letter|
+            link_to(letter, fetch_candidates_path(letter: letter),
+                    style: "font-weight: bold; font-size: 30px;", method: :post)
+          end.join(" | ").html_safe
+        %>
